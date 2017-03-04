@@ -6,6 +6,7 @@ import (
 
 	"github.com/mholt/caddy"
 	"github.com/mholt/caddy/caddyhttp/httpserver"
+	"github.com/mholt/caddy/caddyhttp/templates"
 	"github.com/russross/blackfriday"
 )
 
@@ -116,8 +117,7 @@ func loadParams(c *caddy.Controller, mdc *Config) error {
 			return nil
 		case 2:
 			fpath := filepath.ToSlash(filepath.Clean(cfg.Root + string(filepath.Separator) + tArgs[1]))
-
-			if err := SetTemplate(mdc.Template, tArgs[0], fpath); err != nil {
+			if err := templates.Add(tArgs[0], fpath); err != nil {
 				c.Errf("template parse error: %v", err)
 			}
 			return nil

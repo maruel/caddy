@@ -38,7 +38,7 @@ func execTemplate(c *Config, mdata metadata.Metadata, meta map[string]string, fi
 	}
 
 	b := new(bytes.Buffer)
-	if err := c.Template.ExecuteTemplate(b, mdata.Template, mdData); err != nil {
+	if err := templates.Exec(c.Template, b, mdata.Template, mdData); err != nil {
 		return nil, err
 	}
 
